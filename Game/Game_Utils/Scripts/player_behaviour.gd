@@ -17,7 +17,7 @@ func _input(event):
 
 
 func _physics_process(delta):
-	move(delta)
+	move_and_rotation(delta)
 
 func _process(delta):
 	pass
@@ -47,15 +47,37 @@ func move_input_manager():
 
 
 
+
+#		var angle = cannon.get_angle_to(bodys[0].global_position)
+#		if abs(angle) > .01:
+#			cannon.rotation += cannon.ROT_VEL * delta * sign(angle)
+		
+#		var vector = Vector2(r_hor_axis , r_ver_axis)
+#		if vector.length() > .8:
+#			$barrel.global_rotation = vector.normalized().angle()
+#			can_mouse_look = false
+
+
 ### Function of Movement
-func move(delta):
-	newDir = Vector2(dir_rot_y , dir_rot_x).normalized().angle()
-	
-	if global_rotation != newDir:
-		global_rotation = lerp(global_rotation, newDir, .3)
+func move_and_rotation(delta):
+	newDir = -Vector2(dir_rot_x , dir_rot_y).normalized().angle()
 	
 	move_and_slide(Vector2(direction_x , direction_y) * speed * delta)
+	
+	var offset = PI / 2
+	var rotation_to_mouse = newDir + offset
+	global_rotation = lerp_angle(global_rotation, rotation_to_mouse, 0.25)
 
+
+
+
+func lerp_angle(from, to, weight):
+    return from + short_angle_dist(from, to) * weight
+
+func short_angle_dist(from, to):
+    var max_angle = PI * 2
+    var difference = fmod(to - from, max_angle)
+    return fmod(2 * difference, max_angle) - difference
 
 
 

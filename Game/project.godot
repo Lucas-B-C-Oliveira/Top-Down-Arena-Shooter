@@ -19,6 +19,11 @@ config/name="Top-Down-Shooter"
 run/main_scene="res://Game_Utils/Scenes/main.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=1920
+window/size/height=1080
+
 [rendering]
 
 quality/driver/driver_name="GLES2"
