@@ -1,15 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Game_Utils/Scripts/title_screen.gd" type="Script" id=1]
 [ext_resource path="res://Game_Utils/Assets/Imports/Menu/title_screen/logo.png" type="Texture" id=2]
-[ext_resource path="res://Game_Utils/Scenes/Menu_Scenes/Buttons/NewGameButton.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Game_Utils/Scenes/Menu_Scenes/Buttons/ContinueButton.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Game_Utils/Scenes/Menu_Scenes/Buttons/OptionsButton.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Game_Utils/Assets/Imports/Menu/title_screen/characters.png" type="Texture" id=6]
-[ext_resource path="res://Game_Utils/Scenes/Menu_Scenes/Fonts/montserrat_24.tres" type="DynamicFont" id=7]
-[ext_resource path="res://Game_Utils/Scenes/Fade/FadeIn.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Game_Utils/Scenes/Menu_Scenes/Buttons/Single_Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Game_Utils/Scenes/Menu_Scenes/Buttons/Multiplayer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Game_Utils/Assets/Imports/Menu/title_screen/characters.png" type="Texture" id=5]
+[ext_resource path="res://Game_Utils/Scenes/Menu_Scenes/Fonts/montserrat_24.tres" type="DynamicFont" id=6]
+[ext_resource path="res://Game_Utils/Scenes/Fade/FadeIn.tscn" type="PackedScene" id=7]
 
-[node name="TitleScreen" type="Control"]
+[node name="Chose_Player" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
@@ -40,21 +39,15 @@ size_flags_vertical = 3
 custom_constants/separation = 20
 alignment = 1
 
-[node name="NewGameButton" parent="Menu/CenterRow/Buttons" instance=ExtResource( 3 )]
-margin_top = 86.0
+[node name="Single_Player" parent="Menu/CenterRow/Buttons" instance=ExtResource( 3 )]
+margin_top = 126.0
 margin_right = 838.0
-margin_bottom = 146.0
-scene_to_load = "res://Game_Utils/Scenes/Menu_Scenes/Chose_Player.tscn"
+margin_bottom = 186.0
 
-[node name="ContinueButton" parent="Menu/CenterRow/Buttons" instance=ExtResource( 4 )]
-margin_top = 166.0
+[node name="Multiplayer" parent="Menu/CenterRow/Buttons" instance=ExtResource( 4 )]
+margin_top = 206.0
 margin_right = 838.0
-margin_bottom = 226.0
-
-[node name="OptionsButton" parent="Menu/CenterRow/Buttons" instance=ExtResource( 5 )]
-margin_top = 246.0
-margin_right = 838.0
-margin_bottom = 306.0
+margin_bottom = 266.0
 
 [node name="CenterContainer" type="CenterContainer" parent="Menu/CenterRow"]
 editor/display_folded = true
@@ -69,18 +62,18 @@ margin_left = 259.0
 margin_top = 36.0
 margin_right = 579.0
 margin_bottom = 356.0
-texture = ExtResource( 6 )
+texture = ExtResource( 5 )
 
 [node name="VersionLabel" type="Label" parent="Menu"]
 margin_top = 528.0
 margin_right = 1680.0
 margin_bottom = 920.0
 size_flags_vertical = 3
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = ExtResource( 6 )
 text = "Version 1.2.4
 Herkul Studio"
 valign = 2
 
-[node name="FadeIn" parent="." instance=ExtResource( 8 )]
+[node name="FadeIn" parent="." instance=ExtResource( 7 )]
 visible = false
 [connection signal="fade_finished" from="FadeIn" to="." method="_on_FadeIn_fade_finished"]
