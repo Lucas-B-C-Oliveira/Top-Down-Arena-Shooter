@@ -43,14 +43,17 @@ alignment = 1
 margin_top = 126.0
 margin_right = 838.0
 margin_bottom = 186.0
+scene_to_load = "res://Game_Utils/Scenes/Menu_Scenes/ChoseControllsPlayer1.tscn"
+gameplay_mode = "singleplayer"
 
 [node name="Multiplayer" parent="Menu/CenterRow/Buttons" instance=ExtResource( 4 )]
 margin_top = 206.0
 margin_right = 838.0
 margin_bottom = 266.0
+scene_to_load = "res://Game_Utils/Scenes/Menu_Scenes/ChoseControllsPlayer1.tscn"
+gameplay_mode = "multiplayer"
 
 [node name="CenterContainer" type="CenterContainer" parent="Menu/CenterRow"]
-editor/display_folded = true
 margin_left = 842.0
 margin_right = 1680.0
 margin_bottom = 392.0
