@@ -51,7 +51,7 @@ margin_top = 206.0
 margin_right = 838.0
 margin_bottom = 266.0
 scene_to_load = "res://Game_Utils/Scenes/Menu_Scenes/ChoseControllsPlayer2.tscn"
-player1_controll = "joystick"
+player1_controll = "keyboard"
 
 [node name="CenterContainer" type="CenterContainer" parent="Menu/CenterRow"]
 editor/display_folded = true

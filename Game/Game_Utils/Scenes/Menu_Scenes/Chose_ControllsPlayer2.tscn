@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Game_Utils/Scripts/title_screen.gd" type="Script" id=1]
+[ext_resource path="res://Game_Utils/Scripts/ChoseControllsPlayer2_MANAGER.gd" type="Script" id=1]
 [ext_resource path="res://Game_Utils/Assets/Imports/Menu/title_screen/logo.png" type="Texture" id=2]
 [ext_resource path="res://Game_Utils/Scenes/Menu_Scenes/Buttons/JoyStick-Player2.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Game_Utils/Scenes/Menu_Scenes/Buttons/KeyBoard-Player2.tscn" type="PackedScene" id=4]
@@ -8,7 +8,7 @@
 [ext_resource path="res://Game_Utils/Scenes/Menu_Scenes/Fonts/montserrat_24.tres" type="DynamicFont" id=6]
 [ext_resource path="res://Game_Utils/Scenes/Fade/FadeIn.tscn" type="PackedScene" id=7]
 
-[node name="Chose_Player" type="Control"]
+[node name="Chose_ControllsPlayer2" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
