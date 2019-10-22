@@ -9,6 +9,9 @@ export(String, "multiplayer" , "singleplayer" ) var gameplay_type
 var device_connected = false
 var number_of_device_connected = 0
 
+var player1_Instance
+var player2_Instance
+
 
 func _ready():
 	Input.connect("joy_connection_changed", self, "_on_joy_connection_changed")

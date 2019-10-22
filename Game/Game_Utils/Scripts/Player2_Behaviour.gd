@@ -34,20 +34,20 @@ func _process(delta):
 ### Manager Inputs
 func move_input_manager():
 	
-	if Input.is_action_pressed("player1_right"):
+	if Input.is_action_pressed("player2_right"):
 		direction_x = 1
 		dir_rot_x = 1
-	elif Input.is_action_pressed("player1_left"):
+	elif Input.is_action_pressed("player2_left"):
 		direction_x = -1
 		dir_rot_x = -1
 	else:
 		direction_x = 0
 		dir_rot_x = 0
 	
-	if Input.is_action_pressed("player1_up"):
+	if Input.is_action_pressed("player2_up"):
 		direction_y = -1
 		dir_rot_y = 1
-	elif Input.is_action_pressed("player1_down"): 
+	elif Input.is_action_pressed("player2_down"): 
 		direction_y = 1
 		dir_rot_y = -1
 	else:
