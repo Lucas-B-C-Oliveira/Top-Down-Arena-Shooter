@@ -12,6 +12,8 @@ var number_of_device_connected = 0
 var player1_Instance
 var player2_Instance
 
+export(String , "player1" , "player2", "nobody" ) var who_paused
+
 
 func _ready():
 	Input.connect("joy_connection_changed", self, "_on_joy_connection_changed")
