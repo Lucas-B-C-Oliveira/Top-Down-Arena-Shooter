@@ -8,8 +8,11 @@ var dir_rot_y = 0
 var speed = 10000
 var newDir
 
+export var test_boolean_for_skill_upped = []
+
 
 func _ready():
+	test_array_for_menu()
 	pass 
 
 func _input(event):
@@ -73,7 +76,12 @@ func short_angle_dist(from, to):
     var difference = fmod(to - from, max_angle)
     return fmod(2 * difference, max_angle) - difference
 
-
+func test_array_for_menu():
+	for i in range(0 , 16):
+		if i == 3 or i == 7 or i == 11 or i == 15:
+			test_boolean_for_skill_upped.push_back(true)
+		else:
+			test_boolean_for_skill_upped.push_back(false)
 
 
 

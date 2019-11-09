@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Game_Utils/Scripts/Main_Manager.gd" type="Script" id=1]
+[ext_resource path="res://Game_Utils/Scenes/Menu_Pause.tscn" type="PackedScene" id=2]
 
 [node name="main" type="Node2D"]
 pause_mode = 2
@@ -11,3 +12,8 @@ position = Vector2( 1310.19, 518.033 )
 
 [node name="Position_Player1" type="Position2D" parent="."]
 position = Vector2( 453.899, 521.437 )
+
+[node name="players" type="Node2D" parent="."]
+
+[node name="menu_pause" parent="." instance=ExtResource( 2 )]
+visible = false
