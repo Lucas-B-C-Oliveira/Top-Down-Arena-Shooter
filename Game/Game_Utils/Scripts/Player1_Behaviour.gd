@@ -8,6 +8,8 @@ var dir_rot_y = 0
 var speed = 10000
 var newDir
 
+var pre_bullet = preload("res://Game_Utils/Scenes/bullet.tscn")
+
 export var test_boolean_for_skill_upped = []
 
 
@@ -27,6 +29,7 @@ func _physics_process(delta):
 		pass
 	elif GAME_MANAGER.game_mode == "run":
 		move_and_rotation(delta)
+		shoot_manager()
 
 func _process(delta):
 	if GAME_MANAGER.game_mode == "pause":
@@ -57,6 +60,13 @@ func move_input_manager():
 		direction_y = 0
 		dir_rot_y = 0
 
+func shoot_manager():
+	
+	if Input.is_action_just_pressed("player1_shoot"):
+		if get_tree().get_nodes_in_group("player1_bullets").size() < 3:
+			var bullet = pre_bullet.instance()
+			bullet.global_position = $muzzle.global_position
+			get_parent().add_child(bullet)
 
 ### Functions of Movement and Rotation
 func move_and_rotation(delta):

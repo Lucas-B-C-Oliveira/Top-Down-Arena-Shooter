@@ -5,3 +5,6 @@
 
 [node name="Player2" index="0" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+
+[node name="muzzle" type="Position2D" parent="." index="2"]
+position = Vector2( 0, -35 )
