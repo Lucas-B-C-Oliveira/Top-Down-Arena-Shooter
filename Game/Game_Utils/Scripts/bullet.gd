@@ -7,7 +7,10 @@ func _ready():
 	pass 
 
 func _process(delta):
-	translate(dir * vel * delta)
+	if GAME_MANAGER.game_mode == "pause":
+		return
+	elif GAME_MANAGER.game_mode == "run":
+		translate(dir * vel * delta)
 
 
 func _on_notifier2D_screen_exited():
