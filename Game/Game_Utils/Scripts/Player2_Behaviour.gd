@@ -8,7 +8,7 @@ var dir_rot_y = 0
 var speed = 10000
 var newDir
 
-var pre_bullet = preload("res://Game_Utils/Scenes/bullet.tscn")
+var pre_bullet = preload("res://Game_Utils/Scenes/bullet_player2.tscn")
 
 export var test_boolean_for_skill_upped = []
 
