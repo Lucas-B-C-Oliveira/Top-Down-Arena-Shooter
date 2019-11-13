@@ -66,6 +66,7 @@ func shoot_manager():
 		if get_tree().get_nodes_in_group("player2_bullets").size() < 3:
 			var bullet = pre_bullet.instance()
 			bullet.global_position = $muzzle.global_position
+			bullet.dir = Vector2(sin(rotation) , -cos(rotation))
 			get_parent().add_child(bullet)
 
 
