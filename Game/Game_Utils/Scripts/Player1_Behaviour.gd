@@ -8,14 +8,19 @@ var dir_rot_y = 0
 var speed = 10000
 var newDir
 
+var level = 0 
+var exp_bar = 0
+
 var pre_bullet = preload("res://Game_Utils/Scenes/bullet_player1.tscn")
 
 export var test_boolean_for_skill_upped = []
 
 
+
 func _ready():
 	test_array_for_menu()
 	pass 
+
 
 func _input(event):
 	if GAME_MANAGER.game_mode == "pause":
@@ -31,11 +36,18 @@ func _physics_process(delta):
 		move_and_rotation(delta)
 		shoot_manager()
 
+
 func _process(delta):
 	if GAME_MANAGER.game_mode == "pause":
 		pass
 	elif GAME_MANAGER.game_mode == "run":
-		pass
+		
+		if exp_bar == 100:
+			level += 1
+			exp_bar = 0
+			print("UPEI!!!!")
+			print("My now level is: " + str(level))
+
 
 ### Manager Inputs
 func move_input_manager():
@@ -60,14 +72,17 @@ func move_input_manager():
 		direction_y = 0
 		dir_rot_y = 0
 
+
 func shoot_manager():
 	
 	if Input.is_action_just_pressed("player1_shoot"):
-		if get_tree().get_nodes_in_group("player1_bullets").size() < 3:
-			var bullet = pre_bullet.instance()
-			bullet.global_position = $muzzle.global_position
-			bullet.dir = Vector2(sin(rotation) , -cos(rotation))
-			get_parent().add_child(bullet)
+#		if get_tree().get_nodes_in_group("player1_bullets").size() < 3: # descomentar para colocar limites nas balas #TEST
+		var bullet = pre_bullet.instance()
+		bullet.my_pattern = "player1"
+		bullet.global_position = $muzzle.global_position
+		bullet.dir = Vector2(sin(rotation) , -cos(rotation))
+		get_parent().add_child(bullet)
+
 
 ### Functions of Movement and Rotation
 func move_and_rotation(delta):
@@ -79,8 +94,10 @@ func move_and_rotation(delta):
 	var rotation_to_mouse = newDir + offset
 	global_rotation = lerp_angle(global_rotation, rotation_to_mouse, 0.25)
 
+
 func lerp_angle(from, to, weight):
     return from + short_angle_dist(from, to) * weight
+
 
 func short_angle_dist(from, to):
     var max_angle = PI * 2

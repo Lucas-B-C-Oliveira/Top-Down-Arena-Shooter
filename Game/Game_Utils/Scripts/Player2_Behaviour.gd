@@ -8,6 +8,9 @@ var dir_rot_y = 0
 var speed = 10000
 var newDir
 
+var level = 0 
+var exp_bar = 0
+
 var pre_bullet = preload("res://Game_Utils/Scenes/bullet_player2.tscn")
 
 export var test_boolean_for_skill_upped = []
@@ -35,7 +38,11 @@ func _process(delta):
 	if GAME_MANAGER.game_mode == "pause":
 		pass
 	elif GAME_MANAGER.game_mode == "run":
-		pass
+		if exp_bar == 100:
+			level += 1
+			exp_bar = 0
+			print("UPEI!!!!")
+			print("My now level is: " + str(level))
 
 ### Manager Inputs
 func move_input_manager():
@@ -65,6 +72,7 @@ func shoot_manager():
 	if Input.is_action_just_pressed("player2_shoot"):
 		if get_tree().get_nodes_in_group("player2_bullets").size() < 3:
 			var bullet = pre_bullet.instance()
+			bullet.my_pattern = "player2"
 			bullet.global_position = $muzzle.global_position
 			bullet.dir = Vector2(sin(rotation) , -cos(rotation))
 			get_parent().add_child(bullet)
