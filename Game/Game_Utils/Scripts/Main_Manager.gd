@@ -10,35 +10,16 @@ var enemys_followers = []
 var pre_enemy_follower = preload("res://Game_Utils/Scenes/Enemy1.tscn")
 
 func _enter_tree():
-	for i in range(0 , GAME_MANAGER.followers_enemys_count):
-		
-		var enemy_follower = pre_enemy_follower.instance()
-		$Enemys_Followers.add_child(enemy_follower)
-		enemy_follower.timer_to_start += i ## Talvez tenha que mudar o valor do tempo, pq pode ser q demore mt pros bicho ficar pronto
-		var random_position = randi()%5+1
-		
-		match random_position:
-			1:
-				enemy_follower.global_position = Vector2(2169.418, -114.053)
-			2:
-				enemy_follower.global_position = Vector2(-143.394, -114.053)
-			3:
-				enemy_follower.global_position = Vector2(-143.394, 1176.169)
-			4:
-				enemy_follower.global_position = Vector2(2061.567, 1180.163)
-			_:
-				enemy_follower.global_position = Vector2(2169.418, -114.053)
-		
-		enemys_followers.push_back(enemy_follower)
+	create_enemys_followers()
 
 
 func _input(event):
 	
-	if GAME_MANAGER.win == 3:
+	if GAME_MANAGER.win >= 3:
 		##Ganhou o jogo
 		pass
 	
-	if GAME_MANAGER.followers_enemys_die == GAME_MANAGER.followers_enemys_count:
+	if GAME_MANAGER.followers_enemys_die >= GAME_MANAGER.followers_enemys_count:
 		GAME_MANAGER.phases_completed.pop_back()
 		GAME_MANAGER.phases_completed.push_front(true)
 		GAME_MANAGER.win += 1
@@ -79,6 +60,7 @@ func _input(event):
 			menu_pause.hide_menu()
 	
 
+
 func _ready():
 	
 	
@@ -99,6 +81,21 @@ func _ready():
 		$players.add_child(GAME_MANAGER.player2_Instance)
 
 
+func create_enemys_followers():
+	# Criar os inimigos
+	# Setar como filhos do nodo devido na cena main
+	# Colocar ID neles
+	# Setar a posição deles
+	# Joga-los para um array no GameManager
+	# Chamar o timer para eles começarem a aparecerem
+		for i in range(0 , GAME_MANAGER.followers_enemys_count):
+			var enemy_follower = pre_enemy_follower.instance()
+			$Enemys_Followers.add_child(enemy_follower)
+			enemy_follower.id = i
+			enemy_follower.change_position()
+			GAME_MANAGER.reference_of_enemys_followers.push_back(enemy_follower)
+			enemy_follower.timer_to_start += i ## Talvez tenha que mudar o valor do tempo, pq pode ser q demore mt pros bicho ficar pronto
+			enemys_followers.push_back(enemy_follower)
 
 
 func _on_start_spawn_timer_timeout():

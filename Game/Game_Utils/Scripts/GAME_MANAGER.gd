@@ -14,13 +14,15 @@ var player2_Instance
 
 var start_game : bool = false
 
-var followers_enemys_count : int = 20
+var followers_enemys_count : int = 1
 var followers_enemys_die  : int = 0
 
 var win = 0
 var exp_division = 2
 
 var phases_completed = [ false, false , false ]
+
+var reference_of_enemys_followers = []
 
 export(String , "player1" , "player2", "nobody" ) var who_paused
 
