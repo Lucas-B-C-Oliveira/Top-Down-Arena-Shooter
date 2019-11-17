@@ -6,12 +6,10 @@ var pre_player2 = preload("res://Game_Utils/Scenes/Player2.tscn")
 
 onready var menu_pause = $menu_pause
 
-var enemys_followers = []
 var pre_enemy_follower = preload("res://Game_Utils/Scenes/Enemy1.tscn")
 
 func _enter_tree():
-	create_enemys_followers()
-
+	pass
 
 func _input(event):
 	
@@ -63,6 +61,8 @@ func _input(event):
 
 func _ready():
 	
+	create_enemys_followers()
+	
 	
 	if GAME_MANAGER.gameplay_type == "singleplayer":
 		
@@ -82,12 +82,6 @@ func _ready():
 
 
 func create_enemys_followers():
-	# Criar os inimigos
-	# Setar como filhos do nodo devido na cena main
-	# Colocar ID neles
-	# Setar a posição deles
-	# Joga-los para um array no GameManager
-	# Chamar o timer para eles começarem a aparecerem
 		for i in range(0 , GAME_MANAGER.followers_enemys_count):
 			var enemy_follower = pre_enemy_follower.instance()
 			$Enemys_Followers.add_child(enemy_follower)
@@ -95,7 +89,13 @@ func create_enemys_followers():
 			enemy_follower.change_position()
 			GAME_MANAGER.reference_of_enemys_followers.push_back(enemy_follower)
 			enemy_follower.timer_to_start += i ## Talvez tenha que mudar o valor do tempo, pq pode ser q demore mt pros bicho ficar pronto
-			enemys_followers.push_back(enemy_follower)
+
+
+func replay_in_enemys_followers():
+	for i in GAME_MANAGER.reference_of_enemys_followers:
+		i.change_position()
+		i.timer_to_start
+		i.im_active = true
 
 
 func _on_start_spawn_timer_timeout():

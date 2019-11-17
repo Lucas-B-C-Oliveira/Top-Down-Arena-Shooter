@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Game_Utils/Scripts/Main_Manager.gd" type="Script" id=1]
 [ext_resource path="res://Game_Utils/Scenes/Menu_Pause.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Game_Utils/Scenes/Enemy1.tscn" type="PackedScene" id=3]
 
 [node name="main" type="Control"]
 pause_mode = 2
@@ -24,9 +23,6 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-
-[node name="Enemy1" parent="Enemys_Followers" instance=ExtResource( 3 )]
-position = Vector2( 2003.27, 69.8003 )
 
 [node name="right_top" type="Control" parent="."]
 editor/display_folded = true

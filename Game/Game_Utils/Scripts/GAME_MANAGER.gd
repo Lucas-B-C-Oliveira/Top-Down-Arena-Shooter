@@ -31,7 +31,7 @@ func _ready():
 	Input.connect("joy_connection_changed", self, "_on_joy_connection_changed")
 	game_mode = "run"
 	print("Ready Do GameManager foi chamado")
-	
+
 
 func _on_joy_connection_changed(device_id, connected):
 	
@@ -42,5 +42,11 @@ func _on_joy_connection_changed(device_id, connected):
 	else:
 		print("Não tem device conectado")
 		device_connected = false
+
+
+func stop_me(id):
+	for i in range(0, reference_of_enemys_followers.size() + 1):
+		if i == id:
+			reference_of_enemys_followers[i].im_active = false
 
 
