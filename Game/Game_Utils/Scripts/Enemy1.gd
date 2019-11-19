@@ -103,7 +103,8 @@ func change_position():
 
 func gift_the_player(bullet):
 	if bullet.my_pattern == "player1":
-		GAME_MANAGER.player1_Instance.exp_bar += 2 / GAME_MANAGER.exp_division
+#		GAME_MANAGER.player1_Instance.exp_bar += 2 / GAME_MANAGER.exp_division
+		GAME_MANAGER.player1_Instance.exp_bar += 50
 	elif bullet.my_pattern == "player2":
 			GAME_MANAGER.player2_Instance.exp_bar += 2 / GAME_MANAGER.exp_division
 

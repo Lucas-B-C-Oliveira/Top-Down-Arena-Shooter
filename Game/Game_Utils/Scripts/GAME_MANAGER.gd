@@ -14,7 +14,7 @@ var player2_Instance
 
 var start_game : bool = false
 
-var followers_enemys_count : int = 1
+var followers_enemys_count : int = 10
 var followers_enemys_die  : int = 0
 
 var win = 0

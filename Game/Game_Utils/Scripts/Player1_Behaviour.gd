@@ -8,8 +8,17 @@ var dir_rot_y = 0
 var speed = 10000
 var newDir
 
+var old_level : int = 0
 var level = 0 
 var exp_bar = 0
+
+var life = 3
+
+var speed_bullet = 0
+
+var bullet_size = Vector2.ZERO
+
+var update : bool = false
 
 var pre_bullet = preload("res://Game_Utils/Scenes/bullet_player1.tscn")
 
@@ -42,11 +51,56 @@ func _process(delta):
 		pass
 	elif GAME_MANAGER.game_mode == "run":
 		
+		update_level()
+		
 		if exp_bar == 100:
-			level += 1
+			old_level = level
 			exp_bar = 0
+			update = true
+			level += 1
 			print("UPEI!!!!")
 			print("My now level is: " + str(level))
+
+
+func update_level():
+	if Input.is_action_just_pressed("player1_update_life") and update: # 1
+		if old_level == level - 1:
+			print("Upei minha vida")
+			print("Old_Life: " + str(life))
+			life += 1
+		elif old_level == level - 2:
+			life += 2
+		elif old_level == level - 3:
+			life += 3
+		print("new life: " + str(life))
+		update = false
+	elif Input.is_action_just_pressed("player1_update_bullet_speed") and update: # 2
+		if old_level == level - 1:
+			print("Upei minha bullet speed")
+			print("old bullet speed: " + str(speed_bullet))
+			speed_bullet += 100
+		elif old_level == level - 2:
+			speed_bullet += 200
+		elif old_level == level - 3:
+			speed_bullet += 300
+		update = false
+	elif Input.is_action_just_pressed("player1_update_bullet_size") and update: # 3
+		if old_level == level - 1:
+			print("UPEI O SIZE DA BULLET")
+			bullet_size += Vector2(0.1, 0.1)
+		elif old_level == level - 2:
+			bullet_size += Vector2(0.2, 0.2)
+		elif old_level == level - 3:
+			bullet_size += Vector2(0.3, 0.3)
+		update = false
+	elif Input.is_action_just_pressed("player1_update_speed") and update: # 4
+		if old_level == level - 1:
+			speed += 1000
+		elif old_level == level - 2:
+			speed += 2000
+		elif old_level == level - 3:
+			speed += 3000 
+		update = false
 
 
 ### Manager Inputs
@@ -79,6 +133,8 @@ func shoot_manager():
 #		if get_tree().get_nodes_in_group("player1_bullets").size() < 3: # descomentar para colocar limites nas balas #TEST
 		var bullet = pre_bullet.instance()
 		bullet.my_pattern = "player1"
+		bullet.speed += speed_bullet
+		bullet.set_size(bullet_size)
 		bullet.global_position = $muzzle.global_position
 		bullet.dir = Vector2(cos(rotation) , sin(rotation))
 		get_parent().add_child(bullet)
