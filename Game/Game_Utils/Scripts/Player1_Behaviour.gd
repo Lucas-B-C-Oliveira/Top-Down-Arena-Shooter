@@ -80,19 +80,20 @@ func shoot_manager():
 		var bullet = pre_bullet.instance()
 		bullet.my_pattern = "player1"
 		bullet.global_position = $muzzle.global_position
-		bullet.dir = Vector2(sin(rotation) , -cos(rotation))
+		bullet.dir = Vector2(cos(rotation) , sin(rotation))
 		get_parent().add_child(bullet)
 
 
 ### Functions of Movement and Rotation
 func move_and_rotation(delta):
-	newDir = -Vector2(dir_rot_x , dir_rot_y).normalized().angle()
 	
 	move_and_slide(Vector2(direction_x , direction_y) * speed * delta)
+	look_at(get_global_mouse_position())
 	
-	var offset = PI / 2
-	var rotation_to_mouse = newDir + offset
-	global_rotation = lerp_angle(global_rotation, rotation_to_mouse, 0.25)
+#	newDir = -Vector2(dir_rot_x , dir_rot_y).normalized().angle()
+#	var offset = PI / 2
+#	var rotation_to_mouse = newDir + offset
+#	global_rotation = lerp_angle(global_rotation, rotation_to_mouse, 0.25)
 
 
 func lerp_angle(from, to, weight):
