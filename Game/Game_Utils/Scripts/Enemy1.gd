@@ -16,6 +16,8 @@ var im_active : bool = true
 
 var id : int 
 
+var left_or_right: int
+
 
 func _ready():
 	pass # Replace with function body.
@@ -36,9 +38,9 @@ func _process(delta):
 	
 	if GAME_MANAGER.start_game:
 		timer_to_ready = Timer.new()
+		timer_to_ready.set_one_shot(true)
 		timer_to_ready.connect("timeout", self ,"_on_timer_timeout") 
 		add_child(timer_to_ready) #to process
-		timer_to_ready.one_shot = true
 		timer_to_ready.start(1 + timer_to_start) #to start
 		
 		if im_ready_to_move:
@@ -49,9 +51,14 @@ func _process(delta):
 				pass
 			elif GAME_MANAGER.game_mode == "run":
 				look_at(dir)
-				my_direction = dir - global_position
-				if global_position <= my_direction:
-					change_position()
+				if left_or_right == 1:
+					# Left
+					if global_position.x >= my_direction.x:
+						change_position()
+				else:
+					# Right
+					if global_position.x <= my_direction.x:
+						change_position()
 				move_and_slide((my_direction * speed) * delta) # Quando o inimigo chega perto, ele diminui a velocidade
 				## a distancia começa a ficar menor, entao o dir fica menor e na multiplicação, faz a velocidade
 				## da nave inimiga ficar melhor, procurar uma maneira de corrigir!
@@ -62,7 +69,7 @@ func _on_timer_timeout():
 
 
 func change_position():
-	var left_or_right = randi()%2+1
+	left_or_right = randi()%2+1
 	var random_position = randi()%3+1
 	
 	if left_or_right == 1:
@@ -91,6 +98,7 @@ func change_position():
 			3:
 				global_position = Vector2(2056.29 , 734.658)
 				dir = Vector2(-134.955 , 948.525)
+	my_direction = dir - global_position
 
 
 func gift_the_player(bullet):
