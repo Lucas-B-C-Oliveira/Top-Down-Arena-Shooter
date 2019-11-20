@@ -23,3 +23,6 @@ func self_destroy():
 
 func set_size(scale_vec):
 	global_scale += scale_vec
+
+func set_new_rotation(rotation : float):
+	self.rotation = rotation

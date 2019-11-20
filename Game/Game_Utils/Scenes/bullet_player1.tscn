@@ -10,6 +10,7 @@ height = 22.238
 [node name="bullet" type="Area2D" groups=[
 "player1_bullets",
 ]]
+collision_mask = 4
 script = ExtResource( 1 )
 
 [node name="sprite" type="Sprite" parent="."]

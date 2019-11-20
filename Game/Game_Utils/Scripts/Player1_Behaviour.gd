@@ -136,7 +136,9 @@ func shoot_manager():
 		bullet.speed += speed_bullet
 		bullet.set_size(bullet_size)
 		bullet.global_position = $muzzle.global_position
-		bullet.dir = Vector2(cos(rotation) , sin(rotation))
+		var target_direction = Vector2(cos(rotation) , sin(rotation))
+		bullet.dir = target_direction
+		bullet.set_new_rotation(global_rotation)
 		get_parent().add_child(bullet)
 
 
