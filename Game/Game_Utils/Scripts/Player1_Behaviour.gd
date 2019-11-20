@@ -172,6 +172,16 @@ func test_array_for_menu():
 			test_boolean_for_skill_upped.push_back(false)
 
 
+func game_over():
+	get_tree().change_scene("res://Game_Utils/Scenes/main.tscn")
+
+
+func take_damage(damage):
+	if life <= 0:
+		game_over()
+	life -= damage
+	print(life)
+
 
 
 

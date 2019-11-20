@@ -110,7 +110,10 @@ func gift_the_player(bullet):
 
 
 func _on_area_body_entered(body):
+	if body.has_method("take_damage"):
+		body.take_damage(1)
 	pass
+
 
 
 func _on_area_area_entered(bullet):
