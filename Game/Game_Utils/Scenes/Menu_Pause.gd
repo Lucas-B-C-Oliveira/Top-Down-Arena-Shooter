@@ -19,13 +19,13 @@ export var test_boolean_for_skill_upped = []
 func _ready():
 	
 	parent_skill1.get_child_count()
-	print(parent_skill1.get_children())
+#	print(parent_skill1.get_children())
 	
 	for item in parent_skills:
 #		skills.push_back(item.get_children())
 		for button in item.get_children():
 			skills.push_back(button)
-		print(skills)
+#		print(skills)
 	
 	for i in range(0 , skills.size()):
 		if i == 3 or i == 7 or i == 11 or i == 15:

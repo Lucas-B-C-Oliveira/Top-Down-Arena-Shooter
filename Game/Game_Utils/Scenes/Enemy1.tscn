@@ -7,7 +7,7 @@
 extents = Vector2( 38.9038, 22.4035 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 38.067, 22.4038 )
+extents = Vector2( 42.7507, 29.4683 )
 
 [node name="Enemy1" type="KinematicBody2D"]
 collision_layer = 4
@@ -27,3 +27,4 @@ shape = SubResource( 1 )
 shape = SubResource( 2 )
 [connection signal="area_entered" from="area" to="." method="_on_area_area_entered"]
 [connection signal="body_entered" from="area" to="." method="_on_area_body_entered"]
+[connection signal="body_shape_entered" from="area" to="." method="_on_area_body_shape_entered"]

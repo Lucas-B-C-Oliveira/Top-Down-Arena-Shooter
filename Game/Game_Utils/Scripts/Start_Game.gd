@@ -7,7 +7,8 @@ export(String, "joystick", "keyboard") var player2_controll
 func _ready():
 	for button in get_parent().get_children():
 		if button is CheckButton:
-			print(button)
+#			print(button)
+			pass
 		
 	
 

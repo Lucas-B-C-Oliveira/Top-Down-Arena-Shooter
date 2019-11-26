@@ -14,7 +14,7 @@ var player2_Instance
 
 var start_game : bool = false
 
-var followers_enemys_count : int = 10
+var followers_enemys_count : int
 var followers_enemys_die  : int = 0
 
 var win = 0
@@ -45,8 +45,11 @@ func _on_joy_connection_changed(device_id, connected):
 
 
 func stop_me(id):
-	for i in range(0, reference_of_enemys_followers.size() + 1):
+	for i in range(0, reference_of_enemys_followers.size() -1):
 		if i == id:
 			reference_of_enemys_followers[i].im_active = false
 
+
+func set_number_of_enemys_followers_in_game(number: int):
+	followers_enemys_count = number
 

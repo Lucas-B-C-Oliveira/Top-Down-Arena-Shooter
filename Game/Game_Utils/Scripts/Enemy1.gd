@@ -112,6 +112,14 @@ func gift_the_player(bullet):
 func _on_area_body_entered(body):
 	if body.has_method("take_damage"):
 		body.take_damage(1)
+		change_position()
+		
+		timer_to_ready.one_shot = true
+		timer_to_ready.start(1) #to start
+		
+		##### BUFFS
+		
+		speed += 5 * number_of_dies
 	pass
 
 
@@ -130,3 +138,10 @@ func _on_area_area_entered(bullet):
 		##### BUFFS
 		
 		speed += 10 * number_of_dies
+
+
+func _on_area_body_shape_entered(body_id, body, body_shape, area_shape):
+#	if body.has_method("take_damage"):
+#		print("Colidiu com o player")
+#		body.take_damage(1)
+	pass # Replace with function body.

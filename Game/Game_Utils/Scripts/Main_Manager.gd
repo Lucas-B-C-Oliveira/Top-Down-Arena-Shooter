@@ -8,6 +8,8 @@ onready var menu_pause = $menu_pause
 
 var pre_enemy_follower = preload("res://Game_Utils/Scenes/Enemy1.tscn")
 
+export var number_of_followers_enemys : int
+
 func _enter_tree():
 	pass
 
@@ -60,6 +62,8 @@ func _input(event):
 
 
 func _ready():
+	GAME_MANAGER.set_number_of_enemys_followers_in_game(number_of_followers_enemys) # Setando a variavel pelo inspetor
+	
 	
 	create_enemys_followers()
 	

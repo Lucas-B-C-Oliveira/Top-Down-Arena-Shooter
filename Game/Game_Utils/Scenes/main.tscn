@@ -6,6 +6,7 @@
 [node name="main" type="Control"]
 pause_mode = 2
 script = ExtResource( 1 )
+number_of_followers_enemys = 1
 
 [node name="Position_Player2" type="Position2D" parent="."]
 position = Vector2( 1310.19, 518.033 )
