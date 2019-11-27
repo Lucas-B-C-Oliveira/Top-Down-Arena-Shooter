@@ -10,6 +10,7 @@ var timer_to_start = 1
 
 var life_to_stop = false
 var number_of_dies = 0
+var number_of_max_dies = 3
 
 var timer_to_ready
 var im_active : bool = true
@@ -32,7 +33,7 @@ func _process(delta):
 		life_to_stop = false
 		number_of_dies += 1
 	
-	if number_of_dies >= 3:
+	if number_of_dies >= number_of_max_dies:
 		GAME_MANAGER.followers_enemys_die += 1
 		GAME_MANAGER.stop_me(id)
 		return
@@ -120,7 +121,7 @@ func _on_area_body_entered(body):
 		
 		##### BUFFS
 		
-		speed += 1.1 * number_of_dies
+		speed += 1.5 * number_of_dies
 		print("Encostou no player")
 	pass
 
@@ -139,7 +140,7 @@ func _on_area_area_entered(bullet):
 		
 		##### BUFFS
 		
-		speed += 2 * number_of_dies
+		speed += 2.5 * number_of_dies
 		print("number_of_dies" + str(number_of_dies))
 
 

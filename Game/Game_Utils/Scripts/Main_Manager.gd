@@ -13,19 +13,31 @@ export var number_of_followers_enemys : int
 func _enter_tree():
 	pass
 
-func _input(event):
-	
-	if GAME_MANAGER.win >= 3:
+
+func _process(delta):
+	if GAME_MANAGER.win >= 5:
 		##Ganhou o jogo
+		print("GANHOUUUUUUUUUUUUUUUUU")
 		pass
 	
-	if GAME_MANAGER.followers_enemys_die >= GAME_MANAGER.followers_enemys_count:
+	if GAME_MANAGER.followers_enemys_die >= GAME_MANAGER.followers_enemys_count and GAME_MANAGER.ready_to_wave:
+		GAME_MANAGER.ready_to_wave = false
 		GAME_MANAGER.phases_completed.pop_back()
 		GAME_MANAGER.phases_completed.push_front(true)
 		GAME_MANAGER.win += 1
 		GAME_MANAGER.exp_division += GAME_MANAGER.win
+		GAME_MANAGER.all_enemys_stop = true
+		print("MATEI TODOS OS INIMIGOS DA WAVE")
+	
+	if GAME_MANAGER.all_enemys_stop:
+		GAME_MANAGER.all_enemys_stop = false
+		replay_in_enemys_followers()
+		GAME_MANAGER.ready_to_wave = true
+		GAME_MANAGER.followers_enemys_die = 0
+		print("VOU COMEÇAR A NOVA WAVE")
 
 
+func _input(event):	
 	if Input.is_action_pressed("player1_pause"):
 		
 		if GAME_MANAGER.game_mode == "run":
@@ -98,6 +110,7 @@ func create_enemys_followers():
 func replay_in_enemys_followers():
 	for i in GAME_MANAGER.reference_of_enemys_followers:
 		i.change_position()
+		i.number_of_max_dies += 2
 		i.timer_to_start
 		i.im_active = true
 

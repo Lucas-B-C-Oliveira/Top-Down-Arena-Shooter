@@ -20,6 +20,10 @@ var followers_enemys_die  : int = 0
 var win = 0
 var exp_division = 2
 
+var all_enemys_stop = false
+
+var ready_to_wave = true
+
 var phases_completed = [ false, false , false ]
 
 var reference_of_enemys_followers = []
@@ -48,6 +52,7 @@ func stop_me(id):
 	for i in range(0, reference_of_enemys_followers.size() -1):
 		if i == id:
 			reference_of_enemys_followers[i].im_active = false
+
 
 
 func set_number_of_enemys_followers_in_game(number: int):
