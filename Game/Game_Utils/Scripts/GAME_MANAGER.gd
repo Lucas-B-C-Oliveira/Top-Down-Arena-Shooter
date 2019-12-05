@@ -14,8 +14,12 @@ var player2_Instance
 
 var start_game : bool = false
 
+var lerp_enemys_count : int
 var followers_enemys_count : int
 var followers_enemys_die  : int = 0
+var lerp_enemys_die  : int = 0
+
+var game_win = false
 
 var win = 0
 var exp_division = 2
@@ -27,6 +31,7 @@ var ready_to_wave = true
 var phases_completed = [ false, false , false ]
 
 var reference_of_enemys_followers = []
+var reference_of_enemys_lerp = []
 
 export(String , "player1" , "player2", "nobody" ) var who_paused
 
@@ -48,13 +53,21 @@ func _on_joy_connection_changed(device_id, connected):
 		device_connected = false
 
 
-func stop_me(id):
-	for i in range(0, reference_of_enemys_followers.size() -1):
+func stop_me_followers(id):
+	for i in range(0, reference_of_enemys_followers.size()):
 		if i == id:
 			reference_of_enemys_followers[i].im_active = false
 
+
+func stop_me_lerps(id):
+	for i in range(0, reference_of_enemys_lerp.size()):
+		if i == id:
+			reference_of_enemys_lerp[i].im_active = false
 
 
 func set_number_of_enemys_followers_in_game(number: int):
 	followers_enemys_count = number
 
+
+func set_number_of_enemys_lerp_in_game(number: int):
+	lerp_enemys_count = number

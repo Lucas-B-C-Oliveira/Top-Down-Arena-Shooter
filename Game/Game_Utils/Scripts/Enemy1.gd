@@ -8,7 +8,6 @@ var my_direction
 var im_ready_to_move : bool = false
 var timer_to_start = 1
 
-var life_to_stop = false
 var number_of_dies = 0
 var number_of_max_dies = 3
 
@@ -26,19 +25,17 @@ func _ready():
 
 func _process(delta):
 	
-	if not im_active:
-		return
-	
-	if life_to_stop:
-		life_to_stop = false
-		number_of_dies += 1
 	
 	if number_of_dies >= number_of_max_dies:
 		GAME_MANAGER.followers_enemys_die += 1
-		GAME_MANAGER.stop_me(id)
+		number_of_dies = 0
+		print("Enemy1 Morreu: " , "Vidas perdidas: " , number_of_dies)
 		return
 	
-	if GAME_MANAGER.start_game:
+	if not im_active:
+		return
+	
+	if GAME_MANAGER.start_game and not GAME_MANAGER.game_win:
 		timer_to_ready = Timer.new()
 		timer_to_ready.set_one_shot(true)
 		timer_to_ready.connect("timeout", self ,"_on_timer_timeout") 
@@ -46,8 +43,6 @@ func _process(delta):
 		timer_to_ready.start(1 + timer_to_start) #to start
 		
 		if im_ready_to_move:
-			
-			life_to_stop = false
 			
 			if GAME_MANAGER.game_mode == "pause":
 				pass
@@ -67,9 +62,13 @@ func _process(delta):
 
 
 func _on_timer_timeout():
-	im_ready_to_move = true
+	if number_of_dies < number_of_max_dies:
+		im_ready_to_move = true
+	else:
+		im_active = false
 
 
+## Seta uma posição aleatória e um lado aleatório de acordo com um random
 func change_position():
 	left_or_right = randi()%2+1
 	var random_position = randi()%3+1
@@ -103,14 +102,16 @@ func change_position():
 	my_direction = dir - global_position
 
 
+## Sistema de presente (exp do player)
 func gift_the_player(bullet):
 	if bullet.my_pattern == "player1":
-#		GAME_MANAGER.player1_Instance.exp_bar += 2 / GAME_MANAGER.exp_division
-		GAME_MANAGER.player1_Instance.exp_bar += 50
+		GAME_MANAGER.player1_Instance.exp_bar += 2 / GAME_MANAGER.exp_division
+#		GAME_MANAGER.player1_Instance.exp_bar += 50 # Comente esta linha para teste
 	elif bullet.my_pattern == "player2":
 			GAME_MANAGER.player2_Instance.exp_bar += 2 / GAME_MANAGER.exp_division
 
 
+## Colisão com o player
 func _on_area_body_entered(body):
 	if body.has_method("take_damage"):
 		body.take_damage(1)
@@ -121,26 +122,26 @@ func _on_area_body_entered(body):
 		
 		##### BUFFS
 		
-		speed += 1.5 * number_of_dies
+		speed += 0.3 * number_of_dies
 		print("Encostou no player")
 	pass
 
 
-
+## Colisão com a bullet
 func _on_area_area_entered(bullet):
 	if bullet.has_method("self_destroy"):
-		bullet.self_destroy()
-		life_to_stop = true
-		
-		change_position()
-		gift_the_player(bullet)
-		
-		timer_to_ready.one_shot = true
-		timer_to_ready.start(1 + timer_to_start) #to start
-		
-		##### BUFFS
-		
-		speed += 2.5 * number_of_dies
-		print("number_of_dies" + str(number_of_dies))
+		if number_of_dies < 3:
+			bullet.self_destroy()
+			number_of_dies += 1
+			
+			change_position()
+			gift_the_player(bullet)
+			
+			timer_to_ready.one_shot = true
+			timer_to_ready.start(1 + timer_to_start) #to start
+			
+			##### BUFFS
+			
+			speed += 0.3 * number_of_dies
 
 

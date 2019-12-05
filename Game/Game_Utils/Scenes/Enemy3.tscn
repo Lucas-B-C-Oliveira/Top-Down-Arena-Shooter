@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Game_Utils/Scripts/Enemy3.gd" type="Script" id=1]
+[ext_resource path="res://Game_Utils/Assets/Imports/PNG/Enemies/enemyBlack5.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 306.132
+
+[node name="Enemy3" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource( 1 )
+
+[node name="sprite" type="Sprite" parent="."]
+rotation = -1.5708
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -41.9409, -48.4266, 31.3483, -27.6953, 31.9322, -17.1837, 36.896, -18.0597, 42.1518, -12.8039, 42.1518, 11.7231, 36.896, 17.8549, 32.5162, 17.8549, 31.9322, 27.7825, -41.357, 49.3897, -42.2329, 31.8704, -29.6774, 12.5991, -25.2976, 12.3071, -29.9694, 0.627571, -25.2976, -12.5119, -29.0934, -12.5119, -41.9409, -31.4912 )
+
+[node name="area_to_IA" type="Area2D" parent="."]
+editor/display_folded = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="area_to_IA"]
+shape = SubResource( 1 )
+
+[node name="area_to_damaged" type="Area2D" parent="."]
+editor/display_folded = true
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="area_to_damaged"]
+polygon = PoolVector2Array( -41.9409, -48.4266, 31.3483, -27.6953, 31.9322, -17.1837, 36.896, -18.0597, 42.1518, -12.8039, 42.1518, 11.7231, 36.896, 17.8549, 32.5162, 17.8549, 31.9322, 27.7825, -41.357, 49.3897, -42.2329, 31.8704, -29.6774, 12.5991, -25.2976, 12.3071, -29.9694, 0.627571, -25.2976, -12.5119, -29.0934, -12.5119, -41.9409, -31.4912 )
+
+[node name="Timer" type="Timer" parent="."]
+[connection signal="body_entered" from="area_to_IA" to="." method="_on_area_to_IA_body_entered"]
+[connection signal="area_entered" from="area_to_damaged" to="." method="_on_area_to_damaged_area_entered"]
+[connection signal="body_entered" from="area_to_damaged" to="." method="_on_area_to_damaged_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
